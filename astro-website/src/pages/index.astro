@@ -6,19 +6,25 @@ import SheetCell from '../components/SheetCell.astro';
 const aboutMe = {
     firstName: "Charlotte", 
     grade: "11th", 
-    hobbies: ["coding", "running", "reading", "organization!"], 
-    careers: ["software engineering", "ai engineering"]
+    hobbies: [["coding"], ["running"], ["organization!"]], 
+    careers: [["software engineering"], ["ai engineering"]]
 }
 
 const experience = {
-    high: ["HTML, CSS", "Python", "Flask"], 
-    medium: ["Godot", "React", "Javascript"], 
-    exploring: ["Pytorch", "Astro", "Svelte"]
+    high: [["HTML"], ["CSS"], ["Python"], ["Flask"]], 
+    medium: [["Godot"], ["React"], ["Javascript"]], 
+    exploring: [["Pytorch"], ["Astro"], ["Svelte"]]
 }
 
 // cell data
 const cells = [
-    [["Hello!"]], [["Welcome to my google sheets-inspired personal website!"], [], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]
+    [["Hello! Welcome to my excel/google sheets-inspired website. "]], [["Name"], [aboutMe.firstName], [], []], [["Grade"], [aboutMe.grade], [], []], [["Hobbies"], ...aboutMe.hobbies], [["Careers"], ...aboutMe.careers, []], 
+    [[]], 
+    [["Experience"]], 
+    [["High"], ...experience.high], 
+    [["Medium"], ...experience.medium, []], 
+    [["Exploring"], ...experience.exploring, []]
+
 ]
 ---
 <Sheet>
