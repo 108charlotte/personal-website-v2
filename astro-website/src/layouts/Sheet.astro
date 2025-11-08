@@ -12,9 +12,16 @@
                 font-size: 1rem; 
                 margin: 0; 
                 padding: 0.75rem; 
-                background-color: rgb(245, 245, 245); 
+                background-color: rgb(250, 250, 250); 
                 font-family: 'Inter', monospace;
                 font-weight: normal; 
+            }
+
+            .header-labels {
+                border: 1px solid lightgrey; 
+                padding: 0.25rem; 
+                background-color: rgb(245, 245, 245); 
+                margin: 0px; 
             }
         </style>
 	</head>
@@ -22,6 +29,12 @@
         <header>
             <h1>Charlotte's Organizer</h1>
         </header>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); font-family: Inter; font-size: 0.5rem; text-align: center; margin: 0px; padding: 0px; ">
+            <p class="header-labels">A</p>
+            <p class="header-labels">B</p>
+            <p class="header-labels">C</p>
+            <p class="header-labels">D</p>
+        </div>
         <main>
 		    <slot />
         </main>
