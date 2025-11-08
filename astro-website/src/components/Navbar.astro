@@ -1,0 +1,48 @@
+---
+const {activePage} = Astro.props; 
+const pages = [
+  {name: 'About', href: '/'},
+  {name: 'Big Projects', href: '/big-projects'},
+  {name: 'Little Projects', href: '/little-projects'}, 
+  {name: 'Journey', href: '/journey'},
+  {name: 'Stats', href: '/stats'},
+  {name: 'Contact', href: '/contact'},
+];
+---
+
+<div id="container">
+    <style>
+        ul {
+            padding: 0px; 
+            display: grid; 
+            grid-auto-flow: column; 
+            list-style-type: none; 
+            margin: 0px; 
+        }
+        li {
+            background-color: rgb(223, 223, 223); 
+            padding: 0.75rem; 
+            font-size: 0.8rem; 
+        }
+
+        a {
+            color: rgb(50, 50, 50); 
+            text-decoration: none; 
+        }
+
+        #active {
+            background-color: rgb(205, 217, 240); 
+        }
+
+        #active a {
+            color: rgb(5, 60, 164); 
+        }
+    </style>
+    <ul>
+        {pages.map(page => (
+            <li id={activePage === page.name ? 'active' : undefined}>
+                <a href={page.href}>{page.name}</a>
+            </li>
+        ))}
+    </ul>
+</div>
