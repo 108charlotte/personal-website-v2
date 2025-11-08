@@ -1,0 +1,28 @@
+---
+import Sheet from '../layouts/Sheet.astro';
+import SheetRow from '../components/SheetRow.astro'; 
+
+// info for about
+const aboutMe = {
+    firstName: "Charlotte", 
+    grade: "11th", 
+    hobbies: ["coding", "running", "reading", "organization!"], 
+    careers: ["software engineering", "ai engineering"]
+}
+
+const experience = {
+    high: ["HTML, CSS", "Python", "Flask"], 
+    medium: ["Godot", "React", "Javascript"], 
+    exploring: ["Pytorch", "Astro", "Svelte"]
+}
+
+// cell data
+const cells = [
+    {"row": 0, "col": 0, "value": "##Charlotte's Organizer"},
+]
+---
+<Sheet>
+    {cells.map((element) => (
+        <SheetRow numRows={cells.length}>{element.row}</SheetRow>
+    ))}
+</Sheet>
