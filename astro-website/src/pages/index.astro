@@ -18,24 +18,45 @@ const experience = {
 
 // cell data
 const cells = [
-    [["Hello! Welcome to my excel/google sheets-inspired website. "]], [["Name"], [aboutMe.firstName], [], []], [["Grade"], [aboutMe.grade], [], []], [["Hobbies"], ...aboutMe.hobbies], [["Careers"], ...aboutMe.careers, []], 
+    [
+        {content: "Hello! Welcome to my excel/google sheets-inspired website. ", 
+        styleNotes:"center"}
+    ], 
+    [
+        {content: "Name", styleNotes: "label"}, 
+        {content: aboutMe.firstName}, 
+        [], 
+        []
+    ], 
+    [
+        {content: "Grade", styleNotes: "label"}, 
+        [{content: aboutMe.grade}], 
+        [], 
+        []
+    ], 
+    [
+        {content: "Hobbies", styleNotes: "label"}, ...aboutMe.hobbies
+    ], 
+    [
+        {content: "Careers", styleNotes: "label"}, ...aboutMe.careers, 
+        []
+    ],
     [[]], 
-    [["Experience"]], 
-    [["High"], ...experience.high], 
-    [["Medium"], ...experience.medium, []], 
-    [["Exploring"], ...experience.exploring, []]
-
+    [{content: "Experience", styleNotes: "center"}], 
+    [{content: "High", styleNotes: "label"}, ...experience.high], 
+    [{content: "Medium", styleNotes: "label"}, ...experience.medium, []], 
+    [{content: "Exploring", styleNotes: "label"}, ...experience.exploring, []]
 ]
 ---
 <Sheet>
-    <!--iterates thru every row -->
-    <style>
-    </style>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     {cells.map((row) => (
-        <div class="row" style={`display: grid; grid-template-columns: repeat(${row.length}, 1fr); `}>
-            {row.map((cell) => (
-                <SheetCell content={cell}></SheetCell>
-            ))}
+        <div class="row" style={`display: grid; grid-template-columns: repeat(${row.length}, 1fr); font-family: Inter; font-size: 12px; `}>
+            {row.map((cell) => {
+                const content = cell.content !== undefined ? cell.content : cell; 
+                const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
+                return <SheetCell content={content} styleNotes={styleNotes}></SheetCell>
+            })}
         </div>
     ))}
 </Sheet>

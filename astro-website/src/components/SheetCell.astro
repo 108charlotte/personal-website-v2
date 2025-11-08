@@ -1,8 +1,8 @@
 ---
-const {content} = Astro.props; 
+const {content, styleNotes} = Astro.props; 
 ---
 
-<div id="container">
+<div id="container" class={styleNotes}>
     <style>
         div {
             border: 2px solid lightgray; 
@@ -14,7 +14,12 @@ const {content} = Astro.props;
             margin: 0.5rem; 
             position: relative; 
             display: flex; 
+        }
+        div.center p {
             justify-content: center; 
+        }
+        .label {
+            background-color: rgb(240, 240, 240); 
         }
     </style>
     <p>{content}</p>
