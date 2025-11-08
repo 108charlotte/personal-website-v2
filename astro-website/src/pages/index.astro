@@ -1,6 +1,6 @@
 ---
 import Sheet from '../layouts/Sheet.astro';
-import SheetRow from '../components/SheetRow.astro'; 
+import SheetCell from '../components/SheetCell.astro'; 
 
 // info for about
 const aboutMe = {
@@ -18,11 +18,14 @@ const experience = {
 
 // cell data
 const cells = [
-    {"row": 0, "col": 0, "value": "##Charlotte's Organizer"},
+    [[]], [[], [], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]
 ]
 ---
 <Sheet>
-    {cells.map((element) => (
-        <SheetRow numRows={cells.length}>{element.row}</SheetRow>
+    <!--iterates thru every row -->
+    {cells.map((row) => (
+        row.map((cell) => (
+            <SheetCell numCols={row.length}></SheetCell>
+        ))
     ))}
 </Sheet>
