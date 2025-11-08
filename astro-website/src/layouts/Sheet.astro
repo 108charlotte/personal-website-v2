@@ -4,14 +4,27 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 		<meta name="generator" content={Astro.generator} />
 		<title>Charlotte's Organizer</title>
         <style>
-            
+            h1 {
+                font-size: 1rem; 
+                margin: 0; 
+                padding: 0.75rem; 
+                background-color: rgb(245, 245, 245); 
+                font-family: 'Inter', monospace;
+                font-weight: normal; 
+            }
         </style>
 	</head>
 	<body>
-		<slot />
+        <header>
+            <h1>Charlotte's Organizer</h1>
+        </header>
+        <main>
+		    <slot />
+        </main>
 	</body>
 </html>
 

@@ -18,14 +18,18 @@ const experience = {
 
 // cell data
 const cells = [
-    [[]], [[], [], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]
+    [["Hello!"]], [["Welcome to my google sheets-inspired personal website!"], [], [], []], [[], [], [], []], [[], [], [], []], [[], [], [], []]
 ]
 ---
 <Sheet>
     <!--iterates thru every row -->
+    <style>
+    </style>
     {cells.map((row) => (
-        row.map((cell) => (
-            <SheetCell numCols={row.length}></SheetCell>
-        ))
+        <div class="row" style={`display: grid; grid-template-columns: repeat(${row.length}, 1fr); `}>
+            {row.map((cell) => (
+                <SheetCell content={cell}></SheetCell>
+            ))}
+        </div>
     ))}
 </Sheet>

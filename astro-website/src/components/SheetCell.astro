@@ -1,16 +1,21 @@
 ---
-const {numCols} = Astro.props; 
-const width = 100/numCols
+const {content} = Astro.props; 
 ---
 
-<div id="container" style={`width: ${width}vw; height:40px; `}>
+<div id="container">
     <style>
         div {
             border: 2px solid lightgray; 
             display: inline-block; 
-            margin: -3px -1px; 
+            margin: -1px; 
             box-sizing: border-box; 
         }
+        p {
+            margin: 0.5rem; 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+        }
     </style>
-    <slot></slot>
+    <p>{content}</p>
 </div>
