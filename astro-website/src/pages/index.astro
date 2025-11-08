@@ -19,39 +19,44 @@ const experience = {
 // cell data
 const cells = [
     [
+        {content: "1", styleNotes: "numbering"}, 
         {content: "Hello! Welcome to my excel/google sheets-inspired website. ", 
         styleNotes:"center"}
     ], 
     [
+        {content: "2", styleNotes: "numbering"}, 
         {content: "Name", styleNotes: "label"}, 
         {content: aboutMe.firstName}, 
         [], 
         []
     ], 
     [
+        {content: "3", styleNotes: "numbering"}, 
         {content: "Grade", styleNotes: "label"}, 
         [{content: aboutMe.grade}], 
         [], 
         []
     ], 
     [
+        {content: "4", styleNotes: "numbering"}, 
         {content: "Hobbies", styleNotes: "label"}, ...aboutMe.hobbies
     ], 
     [
+        {content: "5", styleNotes: "numbering"}, 
         {content: "Careers", styleNotes: "label"}, ...aboutMe.careers, 
         []
     ],
-    [[]], 
-    [{content: "Experience", styleNotes: "center"}], 
-    [{content: "High", styleNotes: "label"}, ...experience.high], 
-    [{content: "Medium", styleNotes: "label"}, ...experience.medium, []], 
-    [{content: "Exploring", styleNotes: "label"}, ...experience.exploring, []]
+    [{content: "6", styleNotes: "numbering"}, []], 
+    [{content: "7", styleNotes: "numbering"},{content: "Experience", styleNotes: "center"}], 
+    [{content: "8", styleNotes: "numbering"}, {content: "High", styleNotes: "label"}, ...experience.high], 
+    [{content: "9", styleNotes: "numbering"}, {content: "Medium", styleNotes: "label"}, ...experience.medium, []], 
+    [{content: "10", styleNotes: "numbering"}, {content: "Exploring", styleNotes: "label"}, ...experience.exploring, []]
 ]
 ---
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     {cells.map((row) => (
-        <div class="row" style={`display: grid; grid-template-columns: repeat(${row.length}, 1fr); font-family: Inter; font-size: 12px; `}>
+        <div class="row" style={`display: grid; grid-template-columns: 30px repeat(${row.length-1}, 1fr); font-family: Inter; font-size: 12px; `}>
             {row.map((cell) => {
                 const content = cell.content !== undefined ? cell.content : cell; 
                 const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
