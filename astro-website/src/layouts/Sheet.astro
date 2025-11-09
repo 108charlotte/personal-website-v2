@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/PNG" href="/favicon.PNG" />
         <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
 		<meta name="generator" content={Astro.generator} />
 		<title>Charlotte's Organizer</title>
@@ -11,17 +11,21 @@
             * {
                 font-family: Inter, monospace; 
             }
-            h1 {
-                font-size: 1rem; 
+            header {
                 margin: 0; 
                 padding: 0.75rem; 
                 background-color: rgb(250, 250, 250); 
+            }
+
+            h1 {
+                margin: 0px; 
+                font-size: 1rem; 
                 font-weight: normal; 
+                margin-left: 0.5rem; 
             }
 
             .header-labels {
-                border: 1px solid lightgrey; 
-                padding: 0.25rem; 
+                border: 1px solid lightgrey;  
                 background-color: rgb(245, 245, 245); 
                 margin: 0px; 
                 font-size: 1rem; 
@@ -35,11 +39,16 @@
                 style: inline-block; 
                 background: rgb(220, 220, 220); 
             }
+            img {
+                border: 1.5px solid rgb(156, 156, 156); 
+                border-radius: 20%; 
+            }
         </style>
 	</head>
 	<body>
         <header>
-            <h1>Charlotte's Organizer</h1>
+            <img src="../../public/favicon.PNG" width="50px" style="display: inline-block; vertical-align: middle; ">
+            <h1 style="display: inline-block; vertical-align: middle; ">Charlotte's Organizer</h1>
         </header>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); margin: 0px; padding: 0px; ">
             <p class="header-labels">A</p>
