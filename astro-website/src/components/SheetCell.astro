@@ -10,7 +10,7 @@ const {content, styleNotes} = Astro.props;
             margin: -1px; 
             box-sizing: border-box; 
         }
-        p {
+        p, a {
             margin: 0.5rem; 
             position: relative; 
             display: flex; 
@@ -26,5 +26,7 @@ const {content, styleNotes} = Astro.props;
             color: rgb(86, 86, 86); 
         }
     </style>
-    <p>{content}</p>
+    {styleNotes === 'email' ? 
+    <a href="mailto:charmwoodrum@gmail.com">{content}</a> : 
+    <p>{content}</p>}
 </div>
