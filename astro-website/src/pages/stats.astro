@@ -1,4 +1,57 @@
-<p>This page is a work in progress! </p>
-<a href="/">
-    <button>Head back</button>
-</a>
+---
+import Sheet from '../layouts/Sheet.astro';
+import SheetCell from '../components/SheetCell.astro'; 
+import Navbar from '../components/Navbar.astro'; 
+
+// cell data
+const cells = [
+    [
+        {content: "1", styleNotes: "numbering"}, 
+        {content: "As of November 25th, my coding stats since February are as follows: ", 
+        styleNotes:"center"}
+    ], 
+    [
+        {content: "2", styleNotes: "numbering"}, 
+        {content: "Total hours", styleNotes: "label"}, 
+        {content: "196"}, 
+    ], 
+    [
+        {content: "3", styleNotes: "numbering"}, 
+        {content: "Python percentage", styleNotes: "label"}, 
+        {content: "30.5%"}
+    ], 
+    [
+        {content: "4", styleNotes: "numbering"}, 
+        {content: "Javascript percentage", styleNotes: "label"}, 
+        {content: "19.4%"}
+    ], 
+    [
+        {content: "5", styleNotes: "numbering"}, 
+        {content: "HTML percentage", styleNotes: "label"}, 
+        {content: "13.1%"}
+    ], 
+    [
+        {content: "6", styleNotes: "numbering"}, 
+        {content: "Godot percentage", styleNotes: "label"}, 
+        {content: "12.0% in GDScript, 5.1% in scene tree"}
+    ], 
+    [
+        {content: "7", styleNotes: "numbering"}, 
+        {content: "*this data is collected using hack club's hackatime extension. you can check it out to the right if you are a teenager! "}, 
+        {content: "https://hackatime.hackclub.com/", styleNotes: "link"}
+    ]
+]
+---
+<Sheet>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    {cells.map((row) => (
+        <div class="row" style={`display: grid; grid-template-columns: 30px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
+            {row.map((cell) => {
+                const content = cell.content !== undefined ? cell.content : cell; 
+                const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
+                return <SheetCell content={content} styleNotes={styleNotes}></SheetCell>
+            })}
+        </div>
+    ))}
+    <Navbar activePage="Stats"></Navbar>
+</Sheet>
