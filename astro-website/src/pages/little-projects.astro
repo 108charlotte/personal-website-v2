@@ -1,4 +1,70 @@
-<p>This page is a work in progress! </p>
-<a href="/">
-    <button>Head back</button>
-</a>
+---
+import Sheet from '../layouts/Sheet.astro';
+import SheetCell from '../components/SheetCell.astro'; 
+import Navbar from '../components/Navbar.astro'; 
+import BigProjects from './big-projects.astro';
+// need it to detect a link when it sees anything which starts with https:// and ends with a space or newline
+
+let response = await fetch('https://api.github.com/users/108charlotte/repos')
+let json_repos = await response.json()
+
+function update_date_sort(event_a, event_b) {
+    return new Date(event_b.updated_at).getTime() - new Date(event_a.updated_at).getTime()
+}
+
+json_repos.sort(update_date_sort)
+json_repos.slice(0, 5)
+
+const cells = [
+    [
+        {content: "1", styleNotes: "numbering"}, 
+        {content: "This is a live updating log of my most recently updated github repos. It features some of my smaller projects but may also include upcoming bigger ones, or improvements upon those in the \"Big Projects\" tab! ", 
+        styleNotes:"center"}
+    ], 
+    [
+        {content: "2", styleNotes: "numbering"}, 
+        {content: json_repos[0].name, styleNotes: "label"}, 
+        {content: json_repos[0].description || "No description provided"}, 
+        {content: json_repos[0].url, styleNotes: "link"}, 
+    ], 
+    [
+        {content: "3", styleNotes: "numbering"}, 
+        {content: json_repos[1].name, styleNotes: "label"}, 
+        {content: json_repos[1].description || "No description provided"}, 
+        {content: json_repos[1].url, styleNotes: "link"}, 
+    ], 
+    [
+        {content: "4", styleNotes: "numbering"}, 
+        {content: json_repos[2].name, styleNotes: "label"}, 
+        {content: json_repos[2].description || "No description provided"}, 
+        {content: json_repos[2].url, styleNotes: "link"}, 
+    ], 
+    [
+        {content: "5", styleNotes: "numbering"}, 
+        {content: json_repos[3].name, styleNotes: "label"}, 
+        {content: json_repos[3].description || "No description provided"}, 
+        {content: json_repos[3].url, styleNotes: "link"}, 
+    ], 
+    [
+        {content: "6", styleNotes: "numbering"}, 
+        {content: json_repos[4].name, styleNotes: "label"}, 
+        {content: json_repos[4].description || "No description provided"}, 
+        {content: json_repos[4].url, styleNotes: "link"}, 
+    ], 
+]
+---
+
+
+<Sheet>
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    {cells.map((row) => (
+        <div class="row" style={`display: grid; grid-template-columns: 30px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
+            {row.map((cell) => {
+                const content = cell.content !== undefined ? cell.content : cell; 
+                const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
+                return <SheetCell content={content} styleNotes={styleNotes}></SheetCell>
+            })}
+        </div>
+    ))}
+    <Navbar activePage="Little Projects"></Navbar>
+</Sheet>

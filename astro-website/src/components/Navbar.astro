@@ -35,15 +35,17 @@ const pages = [
             background-color: rgb(220, 201, 251); 
         }
 
-        #active a {
+        #active {
             color: rgb(111, 5, 164); 
         }
     </style>
     <ul>
         {pages.map(page => (
-            <li id={activePage === page.name ? 'active' : undefined}>
-                <a href={page.href}>{page.name}</a>
-            </li>
+            <a href={page.href}>
+                <li id={activePage === page.name ? 'active' : undefined}>
+                    {page.name}
+                </li>
+            </a>
         ))}
     </ul>
 </div>
