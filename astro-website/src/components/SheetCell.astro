@@ -2,12 +2,18 @@
 const {content, styleNotes} = Astro.props; 
 let link_detected = false
 let before_link = ""
-let after_link = ""
 let full_link = ""
+
+// only used after final link found, wiped each time before that
+let after_link = ""
+
+let everything = []
+
 for (let i = 0; i < content.length; i++) {
     let first_8_chars = content.slice(i, i+8)
     full_link = ""
-    if (first_8_chars == "https://") {
+    if (styleNotes != "link" && first_8_chars == "https://") {
+        after_link = ""
         link_detected = true
         full_link = first_8_chars
         let j = 8+i
@@ -15,8 +21,20 @@ for (let i = 0; i < content.length; i++) {
             full_link += content[j]
             j += 1
         }
+        // gets every character left and puts in after_link
         after_link = content.slice(j, content.length)
-        break
+        
+        // store results in arrays, + "" stops wiping the string from wiping their instance in the everything array
+        everything.push([before_link + "", full_link + ""])
+        console.log("pre: " + before_link)
+        console.log("full: " + full_link)
+        console.log("after: " + after_link)
+
+        before_link = ""
+        full_link = ""
+        
+        // skips past rest of link
+        i = j-1
     } else {
         before_link += content[i]
     }
@@ -59,8 +77,11 @@ for (let i = 0; i < content.length; i++) {
         <a href={content} target="_blank">{content}</a>
     ) : link_detected ? (
         <>
-            <p style="display: inline-block;">{before_link}</p>
-            <a style="display: inline-block;" href={full_link}>{full_link}</a>
+            {everything.map(function(one_link, i){
+                return <p style="display: inline-block;">{one_link[0]}
+                            <a style="display: inline-block;" target="_blank" href={one_link[1]}>{one_link[1]}</a>
+                        </p>
+            })}
             <p style="display: inline-block;">{after_link}</p>
         </>
     ) : (
