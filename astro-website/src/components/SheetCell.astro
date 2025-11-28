@@ -1,5 +1,21 @@
 ---
 const {content, styleNotes} = Astro.props; 
+let link_detected = false
+let full_link = ""
+for (let i = 0; i < content.length; i++) {
+    let first_8_chars = content.slice(i, i+8)
+    full_link = ""
+    if (first_8_chars == "https://") {
+        link_detected = true
+        full_link = first_8_chars
+        let j = 8+i
+        while (j < content.length && content[j] != " " && content[j] != "\n") {
+            full_link += content[j]
+            j += 1
+        }
+        break
+    }
+}
 ---
 
 <div id="container" class={styleNotes}>
@@ -36,6 +52,11 @@ const {content, styleNotes} = Astro.props;
         <a href="mailto:charmwoodrum@gmail.com">{content}</a>
     ) : styleNotes === 'link' ? (
         <a href={content} target="_blank">{content}</a>
+    ) : link_detected ? (
+        <>
+            <a href={full_link}>{full_link}</a>
+            <p style="display: inline-block;">{content}</p>
+        </>
     ) : (
         <p>{content}</p>
     )}

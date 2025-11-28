@@ -2,8 +2,6 @@
 import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
-import BigProjects from './big-projects.astro';
-// need it to detect a link when it sees anything which starts with https:// and ends with a space or newline
 
 let response = await fetch('https://api.github.com/users/108charlotte/repos')
 let json_repos = await response.json()
@@ -25,31 +23,31 @@ const cells = [
         {content: "2", styleNotes: "numbering"}, 
         {content: json_repos[0].name, styleNotes: "label"}, 
         {content: json_repos[0].description || "No description provided"}, 
-        {content: json_repos[0].url, styleNotes: "link"}, 
+        {content: json_repos[0].clone_url, styleNotes: "link"}, 
     ], 
     [
         {content: "3", styleNotes: "numbering"}, 
         {content: json_repos[1].name, styleNotes: "label"}, 
         {content: json_repos[1].description || "No description provided"}, 
-        {content: json_repos[1].url, styleNotes: "link"}, 
+        {content: json_repos[1].clone_url, styleNotes: "link"}, 
     ], 
     [
         {content: "4", styleNotes: "numbering"}, 
         {content: json_repos[2].name, styleNotes: "label"}, 
         {content: json_repos[2].description || "No description provided"}, 
-        {content: json_repos[2].url, styleNotes: "link"}, 
+        {content: json_repos[2].clone_url, styleNotes: "link"}, 
     ], 
     [
         {content: "5", styleNotes: "numbering"}, 
         {content: json_repos[3].name, styleNotes: "label"}, 
         {content: json_repos[3].description || "No description provided"}, 
-        {content: json_repos[3].url, styleNotes: "link"}, 
+        {content: json_repos[3].clone_url, styleNotes: "link"}, 
     ], 
     [
         {content: "6", styleNotes: "numbering"}, 
         {content: json_repos[4].name, styleNotes: "label"}, 
         {content: json_repos[4].description || "No description provided"}, 
-        {content: json_repos[4].url, styleNotes: "link"}, 
+        {content: json_repos[4].clone_url, styleNotes: "link"}, 
     ], 
 ]
 ---

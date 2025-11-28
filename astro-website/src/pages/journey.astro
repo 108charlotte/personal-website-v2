@@ -60,7 +60,7 @@ const cells = [
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     {cells.map((row) => (
-        <div class="row" style={`display: grid; grid-template-columns: 30px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
+        <div class="row" style={`display: grid; grid-template-columns: 35px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
             {row.map((cell) => {
                 const content = cell.content !== undefined ? cell.content : cell; 
                 const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
