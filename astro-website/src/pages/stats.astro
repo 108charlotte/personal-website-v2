@@ -3,6 +3,17 @@ import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
 
+let key = import.meta.env.API_KEY
+console.log(key)
+// pull live hackatime data using API
+let response = await fetch("https://hackatime.hackclub.com/api/hackatime/v1/", {
+  headers: {
+    "Authorization": `Bearer ${key}`
+  }
+})
+
+let data = await response.json()
+console.log(data)
 // cell data
 const cells = [
     [
