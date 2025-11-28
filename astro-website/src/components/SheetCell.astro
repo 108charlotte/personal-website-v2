@@ -1,6 +1,8 @@
 ---
 const {content, styleNotes} = Astro.props; 
 let link_detected = false
+let before_link = ""
+let after_link = ""
 let full_link = ""
 for (let i = 0; i < content.length; i++) {
     let first_8_chars = content.slice(i, i+8)
@@ -13,7 +15,10 @@ for (let i = 0; i < content.length; i++) {
             full_link += content[j]
             j += 1
         }
+        after_link = content.slice(j, content.length)
         break
+    } else {
+        before_link += content[i]
     }
 }
 ---
@@ -54,8 +59,9 @@ for (let i = 0; i < content.length; i++) {
         <a href={content} target="_blank">{content}</a>
     ) : link_detected ? (
         <>
-            <a href={full_link}>{full_link}</a>
-            <p style="display: inline-block;">{content}</p>
+            <p style="display: inline-block;">{before_link}</p>
+            <a style="display: inline-block;" href={full_link}>{full_link}</a>
+            <p style="display: inline-block;">{after_link}</p>
         </>
     ) : (
         <p>{content}</p>
