@@ -9,6 +9,8 @@ let after_link = ""
 
 let everything = []
 
+let link_elements = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz./1234567890-"
+
 for (let i = 0; i < content.length; i++) {
     let first_8_chars = content.slice(i, i+8)
     full_link = ""
@@ -17,7 +19,7 @@ for (let i = 0; i < content.length; i++) {
         link_detected = true
         full_link = first_8_chars
         let j = 8+i
-        while (j < content.length && content[j] != " " && content[j] != "\n") {
+        while (j < content.length && link_elements.includes(content[j])) {
             full_link += content[j]
             j += 1
         }
@@ -56,6 +58,10 @@ for (let i = 0; i < content.length; i++) {
             overflow-wrap: anywhere; 
             white-space: pre-line; 
         }
+        p a {
+            margin: 0; 
+            display: inline; 
+        }
         div.center p {
             justify-content: center; 
         }
@@ -76,14 +82,15 @@ for (let i = 0; i < content.length; i++) {
     ) : styleNotes === 'link' ? (
         <a href={content} target="_blank">{content}</a>
     ) : link_detected ? (
-        <>
-            {everything.map(function(one_link, i){
-                return <p style="display: inline-block;">{one_link[0]}
-                            <a style="display: inline-block;" target="_blank" href={one_link[1]}>{one_link[1]}</a>
-                        </p>
+        <p>
+            {everything.map(function(one_link){
+                return <>
+                {one_link[0]}
+                <a style="display: inline-block;" target="_blank" href={one_link[1]}>{one_link[1]}</a>
+                </>
             })}
-            <p style="display: inline-block;">{after_link}</p>
-        </>
+            {after_link}
+        </p>
     ) : (
         <p>{content}</p>
     )}
