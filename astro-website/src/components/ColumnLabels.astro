@@ -1,0 +1,21 @@
+---
+const {letters} = Astro.props
+let letter_array = letters.split('')
+---
+<div style=`display: grid; grid-template-columns: 35px repeat(${letters.length}, 1fr); margin: 0px; padding: 0px; `>
+    <style>
+        .header-labels {
+                border: 1px solid lightgrey;  
+                background-color: rgb(245, 245, 245); 
+                margin: 0px; 
+                font-size: 1rem; 
+                font-size: 0.6rem; 
+                text-align: center;
+                color: rgb(86, 86, 86); 
+            }
+    </style>
+    <div class="header-labels"></div>
+    {letter_array.map(letter => 
+        <p class="header-labels">{letter}</p>
+    )}
+</div>

@@ -2,6 +2,7 @@
 import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
+import ColumnLabels from '../components/ColumnLabels.astro'; 
 
 // info for about
 const aboutMe = {
@@ -55,6 +56,7 @@ const cells = [
 ---
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <ColumnLabels letters="ABCDE" />
     {cells.map((row) => (
         <div class="row" style={`display: grid; grid-template-columns: 35px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
             {row.map((cell) => {

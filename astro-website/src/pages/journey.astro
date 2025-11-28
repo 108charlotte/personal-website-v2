@@ -2,6 +2,7 @@
 import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
+import ColumnLabels from '../components/ColumnLabels.astro'; 
 
 // cell data
 const cells = [
@@ -48,17 +49,18 @@ const cells = [
     [
         {content: "9", styleNotes: "numbering"}, 
         {content: "11th grade first semester (2025)", styleNotes: "highlight"}, 
-        {content: "• Organized Daydream Atlanta\n• Tutored python + pygame and intro to web development through Schoolhouse.world\n\n• Attended Hack Club's Parthenon hackathon for underrepresented genders in NYC\n\n• Joined Hack Club's Special Activities Division to organize community events in the Slack\n\n• Project reviewer for the Athena Awards\n\n• Glenn Institute Civic ambassador for robotics\n\n• Wrote an article for school's STEM newspaper on the impacts of AI on software engineering careers", styleNotes: "highlight"}
+        {content: "• Organized Daydream Atlanta\n\n• Tutored python + pygame and intro to web development through Schoolhouse.world\n\n• Attended Hack Club's Parthenon hackathon for underrepresented genders in NYC\n\n• Joined Hack Club's Special Activities Division to organize community events in the Slack\n\n• Project reviewer for the Athena Awards\n\n• Glenn Institute Civic ambassador for robotics\n\n• Wrote an article for school's STEM newspaper on the impacts of AI on software engineering careers", styleNotes: "highlight"}
     ], 
     [
         {content: "10", styleNotes: "numbering"}, 
-        {content: "Upcoming pursuits"}, 
+        {content: "Current/upcoming pursuits"}, 
         {content: "• Organizing a 2026 spring Athena/Days of Service event through Hack Club (an event for underrepresented genders in tech)\n\n• RSVPed to organize another game jam (Campfire)\n\n• Interning for the Judicial Council of Georgia/Administrative Office of the Courts application development team for 2 weeks during Janterm\n\n• Launching my school's first CS peer tutoring program"}
     ], 
 ]
 ---
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <ColumnLabels letters="AB" />
     {cells.map((row) => (
         <div class="row" style={`display: grid; grid-template-columns: 35px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
             {row.map((cell) => {

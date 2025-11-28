@@ -3,3 +3,4 @@
 - [X] live pull from hackatime data? for stats page
 - [X] add favicon
 - [ ] fix issues with mobile
+- [X] need to customize number of column headers

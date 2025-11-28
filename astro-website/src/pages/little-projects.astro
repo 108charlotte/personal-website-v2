@@ -2,6 +2,7 @@
 import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
+import ColumnLabels from '../components/ColumnLabels.astro'; 
 
 let response = await fetch('https://api.github.com/users/108charlotte/repos')
 let json_repos = await response.json()
@@ -55,8 +56,9 @@ const cells = [
 
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <ColumnLabels letters="ABC" />
     {cells.map((row) => (
-        <div class="row" style={`display: grid; grid-template-columns: 30px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
+        <div class="row" style={`display: grid; grid-template-columns: 35px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
             {row.map((cell) => {
                 const content = cell.content !== undefined ? cell.content : cell; 
                 const styleNotes = cell.styleNotes !== undefined ? cell.styleNotes : cell; 
