@@ -4,50 +4,72 @@ import SheetCell from '../components/SheetCell.astro';
 import Navbar from '../components/Navbar.astro'; 
 
 let key = import.meta.env.API_KEY
-console.log(key)
 // pull live hackatime data using API
-let response = await fetch("https://hackatime.hackclub.com/api/hackatime/v1/", {
+let response = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats", {
   headers: {
     "Authorization": `Bearer ${key}`
   }
 })
 
 let data = await response.json()
-console.log(data)
+
+let language_data = []
+let from_hackatime_langs = data.data.languages
+for (let i = 0; i < 5; i++) {
+    if (from_hackatime_langs[i].name == "Scene") {
+        language_data.push(["Godot Scene editor", from_hackatime_langs[i].percent])
+    }
+    language_data.push([from_hackatime_langs[i].name, from_hackatime_langs[i].percent])
+}
+
+let stats = {
+    // don't want to display exact total w/ minutes and seconds for privacy reasons :)
+    hours: Math.trunc(data.data.total_seconds/(60*60)), 
+    // languages data apparently already sorted! 
+    top_5_languages: language_data
+}
+
+console.log(stats)
+
 // cell data
 const cells = [
     [
         {content: "1", styleNotes: "numbering"}, 
-        {content: "As of November 25th, my coding stats since February are as follows: ", 
+        {content: "My coding stats since February 2025 are as follows (this is live-updating!): ", 
         styleNotes:"center"}
     ], 
     [
         {content: "2", styleNotes: "numbering"}, 
         {content: "Total hours", styleNotes: "label"}, 
-        {content: "196"}, 
+        {content: stats.hours}, 
     ], 
     [
         {content: "3", styleNotes: "numbering"}, 
-        {content: "Python percentage", styleNotes: "label"}, 
-        {content: "30.5%"}
+        {content: stats.top_5_languages[0][0] + " percentage", styleNotes: "label"}, 
+        {content: stats.top_5_languages[0][1] + "%"}
     ], 
     [
         {content: "4", styleNotes: "numbering"}, 
-        {content: "Javascript percentage", styleNotes: "label"}, 
-        {content: "19.4%"}
+        {content: stats.top_5_languages[1][0] + " percentage", styleNotes: "label"}, 
+        {content: stats.top_5_languages[1][1] + "%"}
     ], 
     [
         {content: "5", styleNotes: "numbering"}, 
-        {content: "HTML percentage", styleNotes: "label"}, 
-        {content: "13.1%"}
+        {content: stats.top_5_languages[2][0] + " percentage", styleNotes: "label"}, 
+        {content: stats.top_5_languages[2][1] + "%"}
     ], 
     [
         {content: "6", styleNotes: "numbering"}, 
-        {content: "Godot percentage", styleNotes: "label"}, 
-        {content: "12.0% in GDScript, 5.1% in scene tree"}
+        {content: stats.top_5_languages[3][0] + " percentage", styleNotes: "label"}, 
+        {content: stats.top_5_languages[3][1] + "%"}
     ], 
     [
         {content: "7", styleNotes: "numbering"}, 
+        {content: stats.top_5_languages[4][0] + " percentage", styleNotes: "label"}, 
+        {content: stats.top_5_languages[4][1] + "%"}
+    ], 
+    [
+        {content: "8", styleNotes: "numbering"}, 
         {content: "*this data is collected using hack club's hackatime extension. you can check it out to the right if you are a teenager! "}, 
         {content: "https://hackatime.hackclub.com/", styleNotes: "link"}
     ]
