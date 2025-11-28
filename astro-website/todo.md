@@ -1,4 +1,5 @@
 - [X] make it so that I can add links and have them auto-detect
 - [X] change website name
-- [ ] live pull from hackatime data? for stats page
-- [ ] add favicon
+- [X] live pull from hackatime data? for stats page
+- [X] add favicon
+- [ ] fix issues with mobile
