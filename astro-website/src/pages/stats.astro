@@ -6,11 +6,8 @@ import ColumnLabels from '../components/ColumnLabels.astro';
 
 let key = import.meta.env.API_KEY
 // pull live hackatime data using API
-let response = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats", {
-  headers: {
-    "Authorization": `Bearer ${key}`
-  }
-})
+// features=languages,projects if I want both, but since i already pulled from github then im good
+let response = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats?features=languages")
 
 let data = await response.json()
 

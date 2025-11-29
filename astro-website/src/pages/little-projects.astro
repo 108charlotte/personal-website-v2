@@ -3,16 +3,57 @@ import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
 import ColumnLabels from '../components/ColumnLabels.astro'; 
-
+// using github api
 let response = await fetch('https://api.github.com/users/108charlotte/repos')
 let json_repos = await response.json()
+
+// hackatime data
+let response_hackatime = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats?features=projects")
+
+let time_data = await response_hackatime.json()
+console.log(time_data.data.projects)
 
 function update_date_sort(event_a, event_b) {
     return new Date(event_b.updated_at).getTime() - new Date(event_a.updated_at).getTime()
 }
 
 json_repos.sort(update_date_sort)
-json_repos.slice(0, 5)
+json_repos = json_repos.slice(0,5)
+
+let top_repo_info = []
+let hackatime_found = false
+for (let i = 0; i < 5; i++) {
+    hackatime_found = false
+    let curr_repo_name = json_repos[i].name
+    let curr_repo_description = json_repos[i].description
+    if (!curr_repo_description || curr_repo_description=="") {
+        curr_repo_description = "No description found"
+    }
+    let curr_repo_link = json_repos[i].clone_url
+    if (curr_repo_name == "All-Roads-Lead-to-Greece") {
+        // repo name changed, since this is a recent one I am updating it to the old repo name from during parthy. also, since the repo name is changed, the hours probably won't increase on the same project, so I'm just hard coding these hours
+        let coding_time = "7h 9m"
+        top_repo_info.push([curr_repo_name, curr_repo_description, coding_time, curr_repo_link])
+        continue
+    } else if (curr_repo_name == "Ab-Astro-Ad-Terram") {
+        // same situation as the above, this is a big one so just hardcoding from hackatime api bc name was changed multiple times
+        let coding_time = "29h 16m"
+        top_repo_info.push([curr_repo_name, curr_repo_description, coding_time, curr_repo_link])
+        continue
+    }
+    for (let j = 0; j < time_data.data.projects.length; j++) {
+        // also checks if there is a hackatime project for the repo name without the dashes
+        if (!hackatime_found && (time_data.data.projects[j].name.replace(" ", "-") == curr_repo_name || time_data.data.projects[j].name == curr_repo_name)) {
+            let coding_time = time_data.data.projects[j].text
+            top_repo_info.push([curr_repo_name, curr_repo_description, coding_time, curr_repo_link])
+            hackatime_found = true
+            break
+        }
+    }
+    if (!hackatime_found) {
+        top_repo_info.push([curr_repo_name, curr_repo_description, "No hackatime data found", curr_repo_link])
+    }
+}
 
 const cells = [
     [
@@ -22,33 +63,38 @@ const cells = [
     ], 
     [
         {content: "2", styleNotes: "numbering"}, 
-        {content: json_repos[0].name, styleNotes: "label"}, 
-        {content: json_repos[0].description || "No description provided"}, 
-        {content: json_repos[0].clone_url, styleNotes: "link"}, 
+        {content: top_repo_info[0][0], styleNotes: "label"}, 
+        {content: top_repo_info[0][1]}, 
+        {content: top_repo_info[0][2]}, 
+        {content: top_repo_info[0][3], styleNotes: "link"}, 
     ], 
     [
         {content: "3", styleNotes: "numbering"}, 
-        {content: json_repos[1].name, styleNotes: "label"}, 
-        {content: json_repos[1].description || "No description provided"}, 
-        {content: json_repos[1].clone_url, styleNotes: "link"}, 
+        {content: top_repo_info[1][0], styleNotes: "label"}, 
+        {content: top_repo_info[1][1]}, 
+        {content: top_repo_info[1][2]}, 
+        {content: top_repo_info[1][3], styleNotes: "link"}, 
     ], 
     [
         {content: "4", styleNotes: "numbering"}, 
-        {content: json_repos[2].name, styleNotes: "label"}, 
-        {content: json_repos[2].description || "No description provided"}, 
-        {content: json_repos[2].clone_url, styleNotes: "link"}, 
+        {content: top_repo_info[2][0], styleNotes: "label"}, 
+        {content: top_repo_info[2][1]}, 
+        {content: top_repo_info[2][2]}, 
+        {content: top_repo_info[2][3], styleNotes: "link"}, 
     ], 
     [
         {content: "5", styleNotes: "numbering"}, 
-        {content: json_repos[3].name, styleNotes: "label"}, 
-        {content: json_repos[3].description || "No description provided"}, 
-        {content: json_repos[3].clone_url, styleNotes: "link"}, 
+        {content: top_repo_info[3][0], styleNotes: "label"}, 
+        {content: top_repo_info[3][1]}, 
+        {content: top_repo_info[3][2]}, 
+        {content: top_repo_info[3][3], styleNotes: "link"}, 
     ], 
     [
         {content: "6", styleNotes: "numbering"}, 
-        {content: json_repos[4].name, styleNotes: "label"}, 
-        {content: json_repos[4].description || "No description provided"}, 
-        {content: json_repos[4].clone_url, styleNotes: "link"}, 
+        {content: top_repo_info[4][0], styleNotes: "label"}, 
+        {content: top_repo_info[4][1]}, 
+        {content: top_repo_info[4][2]}, 
+        {content: top_repo_info[4][3], styleNotes: "link"}, 
     ], 
 ]
 ---
@@ -56,7 +102,7 @@ const cells = [
 
 <Sheet>
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-    <ColumnLabels letters="ABC" />
+    <ColumnLabels letters="ABCD" />
     {cells.map((row) => (
         <div class="row" style={`display: grid; grid-template-columns: 35px repeat(${row.length-1}, 1fr); font-size: 12px; `}>
             {row.map((cell) => {
