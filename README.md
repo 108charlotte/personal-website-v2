@@ -1,5 +1,5 @@
 # personal-website-v2
-A google sheets-inspired personal website! 
+A google sheets/excel -inspired personal website built with Astro
 
 ## tabs
 - about: a general, high-level overview of my interests and skills
