@@ -3,6 +3,10 @@ import Sheet from '../layouts/Sheet.astro';
 import SheetCell from '../components/SheetCell.astro'; 
 import Navbar from '../components/Navbar.astro'; 
 import ColumnLabels from '../components/ColumnLabels.astro'; 
+
+// allows live updates from apis
+export const prerender = false
+
 // using github api
 let response = await fetch('https://api.github.com/users/108charlotte/repos?sort=updated')
 let json_repos = await response.json()
