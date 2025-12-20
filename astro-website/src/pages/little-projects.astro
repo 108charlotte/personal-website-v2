@@ -7,31 +7,26 @@ import ColumnLabels from '../components/ColumnLabels.astro';
 // allows live updates from apis
 export const prerender = false
 
+// using github api
+let response = await fetch('https://api.github.com/users/108charlotte/repos?sort=updated', {
+    headers: {
+        'User-agent': 'personal-website'
+    }
+})
+let json_repos = await response.json()
+
+// hackatime data
+let response_hackatime = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats?features=projects")
+
+let time_data = await response_hackatime.json()
+console.log(time_data.data.projects)
+
 function update_date_sort(event_a, event_b) {
     return new Date(event_b.updated_at).getTime() - new Date(event_a.updated_at).getTime()
 }
 
-async function call_apis() {
-    // using github api
-    let response = await fetch('https://api.github.com/users/108charlotte/repos?sort=updated', {
-        headers: {
-            'User-agent': 'personal-website'
-        }
-    })
-    let json_repos = await response.json()
-
-    // hackatime data
-    let response_hackatime = await fetch("https://hackatime.hackclub.com/api/v1/users/U084T4KCZ8Q/stats?features=projects")
-
-    let time_data = await response_hackatime.json()
-    console.log(time_data.data.projects)
-
-    json_repos.sort(update_date_sort)
-    json_repos = json_repos.slice(0,5)
-    return {json_repos, time_data}
-}
-
-const {json_repos, time_data} = await call_apis()
+json_repos.sort(update_date_sort)
+json_repos = json_repos.slice(0,5)
 
 let top_repo_info = []
 let hackatime_found = false
