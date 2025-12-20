@@ -8,11 +8,7 @@ import ColumnLabels from '../components/ColumnLabels.astro';
 export const prerender = false
 
 // using github api
-let response = await fetch('https://api.github.com/users/108charlotte/repos?sort=updated', {
-    headers: {
-        'User-agent': 'personal-website'
-    }
-})
+let response = await fetch('https://api.github.com/users/108charlotte/repos?sort=updated')
 let json_repos = await response.json()
 
 // hackatime data
