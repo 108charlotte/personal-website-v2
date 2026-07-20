@@ -7,6 +7,7 @@ import ColumnLabels from '../components/ColumnLabels.astro';
 // info for about
 const aboutMe = {
     firstName: "Charlotte", 
+    lastName: "Woodrum", 
     grade: "11th", 
     hobbies: [["Coding"], ["Running"], ["Organization!"]], 
     careers: [["Software Engineering"], ["AI Engineering"]]
@@ -29,29 +30,30 @@ const cells = [
         {content: "2", styleNotes: "numbering"}, 
         {content: "Name", styleNotes: "label"}, 
         {content: aboutMe.firstName}, 
-        [], [], []
+        {content: aboutMe.lastName}, 
+        [], []
     ], 
     [
-        {content: "3", styleNotes: "numbering"}, 
+        {content: "4", styleNotes: "numbering"}, 
         {content: "Grade", styleNotes: "label"}, 
         {content: aboutMe.grade}, 
         [], [], []
     ], 
     [
-        {content: "4", styleNotes: "numbering"}, 
+        {content: "5", styleNotes: "numbering"}, 
         {content: "Hobbies", styleNotes: "label"}, ...aboutMe.hobbies, 
         []
     ], 
     [
-        {content: "5", styleNotes: "numbering"}, 
+        {content: "6", styleNotes: "numbering"}, 
         {content: "Careers", styleNotes: "label"}, ...aboutMe.careers, 
         [], []
     ],
-    [{content: "7", styleNotes: "numbering"},{content: "Experience", styleNotes: "center"}], 
-    [{content: "8", styleNotes: "numbering"}, {content: "High", styleNotes: "label"}, ...experience.high], 
-    [{content: "9", styleNotes: "numbering"}, {content: "Medium", styleNotes: "label"}, ...experience.medium, []], 
-    [{content: "10", styleNotes: "numbering"}, {content: "Exploring", styleNotes: "label"}, ...experience.exploring, []], 
-    [{content:"11", styleNotes: "numbering"}, {content: "This website is open source! check it out at https://github.com/108charlotte/personal-website-v2"}]
+    [{content: "8", styleNotes: "numbering"},{content: "Experience", styleNotes: "center"}], 
+    [{content: "9", styleNotes: "numbering"}, {content: "High", styleNotes: "label"}, ...experience.high], 
+    [{content: "10", styleNotes: "numbering"}, {content: "Medium", styleNotes: "label"}, ...experience.medium, []], 
+    [{content: "11", styleNotes: "numbering"}, {content: "Exploring", styleNotes: "label"}, ...experience.exploring, []], 
+    [{content:"12", styleNotes: "numbering"}, {content: "This website is open source! check it out at https://github.com/108charlotte/personal-website-v2"}]
 ]
 ---
 <Sheet>
